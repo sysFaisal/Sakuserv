@@ -1,0 +1,22 @@
+services:
+  wakapi:
+    image: ghcr.io/muety/wakapi:latest
+    container_name: wakapi 
+    restart: unless-stopped
+    ports:
+      - "3200:3000"
+    environment:
+      - WAKAPI_ALLOW_SIGNUP=false
+      - WAKAPI_DB_TYPE=sqlite3
+      - WAKAPI_DB_NAME=/data/wakapi.db
+      - WAKAPI_PASSWORD_SALT=06069453350961093871202194354904
+      - WAKAPI_LISTEN_PORT=3000
+      - WAKAPI_BASE_URL=https://wakapi.sakuspace.my.id
+    volumes:
+      - ./wakapi_data:/data
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true

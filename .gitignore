@@ -1,0 +1,34 @@
+# Runtime and generated data
+**/node_modules/
+**/.next/
+**/out/
+**/build/
+**/coverage/
+**/*.tsbuildinfo
+
+# Container data and local state
+apps/ptrfv2/
+apps/portainer/data/
+apps/wakapi/wakapi_data/
+infra/caddy/data/
+infra/caddy/config/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+**/*.pem
+**/*.key
+**/*secret*
+**/*credentials*
+
+# Local/editor/OS files
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Keep deployment configuration in Git
+!**/compose.yml
+!**/Caddyfile
+!**/Dockerfile

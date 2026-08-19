@@ -1,0 +1,23 @@
+:80 {
+    @portfolio host sakuspace.my.id
+    reverse_proxy @portfolio portfolio:3000
+
+    @portainer host portainer.sakuspace.my.id
+reverse_proxy @portainer https://portainer:9443 {
+    transport http {
+        tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    header_up X-Forwarded-Host {host}
+    header_up X-Forwarded-Port {port}
+    header_up X-Forwarded-Proto {scheme}
+    header_up Origin "https://{host}"
+}
+
+    @wakapi host wakapi.sakuspace.my.id
+    header @wakapi Access-Control-Allow-Origin "*"
+    header @wakapi Access-Control-Allow-Methods "GET, OPTIONS"
+    header @wakapi Access-Control-Allow-Headers "*"
+    
+    reverse_proxy @wakapi wakapi:3000
+}
