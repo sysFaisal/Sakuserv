@@ -1,0 +1,31 @@
+services:
+  attelierfe:
+    image: attelierfe:latest
+    container_name: attelierfe
+
+    cap_add:
+      - NET_ADMIN
+
+    networks:
+      home-tail:
+      homelab:
+
+    dns:
+      - 100.100.100.100
+
+    environment:
+      API_ORIGIN: https://ct100-gateway.taila877ec.ts.net/attelier
+      NODE_ENV: production
+      PORT: 3000
+
+    ports:
+      - "3101:3000"
+
+    restart: unless-stopped
+
+networks:
+  homelab:
+    external: true
+
+  home-tail:
+    external: true

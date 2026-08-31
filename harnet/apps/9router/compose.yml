@@ -1,0 +1,24 @@
+services:
+  9router:
+    image: ghcr.io/decolua/9router:latest
+    container_name: 9router
+    restart: unless-stopped
+
+    expose:
+      - "20128"
+
+    environment:
+      INITIAL_PASSWORD: "Ciamis280407"
+      DATA_DIR: /app/data
+      PORT: 20128
+      HOSTNAME: 0.0.0.0
+
+    volumes:
+      - ./data:/app/data
+
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true

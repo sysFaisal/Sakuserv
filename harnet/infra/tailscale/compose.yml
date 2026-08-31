@@ -1,0 +1,42 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: harnet-gateway
+    hostname: harnet-gateway
+
+    environment:
+      TS_USERSPACE: "false"
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_EXTRA_ARGS: "--accept-dns=true"
+
+    volumes:
+      - tailscale-fe-state:/var/lib/tailscale
+      - ./entrypoint.sh:/entrypoint.sh:ro
+
+    networks:
+      home-tail:
+        ipv4_address: 172.19.0.2
+
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+    sysctls:
+      net.ipv4.ip_forward: "1"
+
+    entrypoint:
+      - /bin/sh
+      - /entrypoint.sh
+
+    restart: unless-stopped
+
+volumes:
+  tailscale-fe-state:
+
+networks:
+  home-tail:
+    external: true

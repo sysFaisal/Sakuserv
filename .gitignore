@@ -19,8 +19,16 @@ infra/caddy/config/
 !.env.example
 **/*.pem
 **/*.key
+**/*.crt
 **/*secret*
 **/*credentials*
+**/jwt-secret
+**/cli-secret
+**/machine-id
+**/9router/data/**
+**/*.sqlite
+**/*.sqlite-*
+**/*.db
 
 # Local/editor/OS files
 .DS_Store

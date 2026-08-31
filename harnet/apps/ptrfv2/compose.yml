@@ -1,0 +1,19 @@
+services:
+  portfolio:
+    image: ptrf-portfolio:latest
+    container_name: portfolio
+
+    restart: unless-stopped
+
+    environment:
+      WAKAPI_INTERNAL_URL: http://wakapi:3000
+
+    ports:
+      - "3100:3000"
+
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true

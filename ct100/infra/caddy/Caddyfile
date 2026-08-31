@@ -1,0 +1,7 @@
+ct100-gateway.taila877ec.ts.net {
+    tls internal
+
+    handle_path /attelier/* {
+        reverse_proxy attelier_backend:2736
+    }
+}
